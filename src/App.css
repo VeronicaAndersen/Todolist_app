@@ -4,13 +4,11 @@
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
+    color: #fff;
 }
 
 body {
-    background: linear-gradient(45deg,
-            rgb(16, 255, 239) 0%,
-            rgb(255, 100, 216) 50%,
-            rgb(188, 43, 245) 100%);
+    background-image: url(../images/bg.svg);
 }
 
 .todo-app {
@@ -32,7 +30,7 @@ h1 {
     font-size: 24px;
 }
 
-.complete {
+.complete{
     text-decoration: line-through;
     opacity: 0.4;
 }
@@ -49,10 +47,6 @@ h1 {
     width: 320px;
     background: transparent;
     color: #fff;
-}
-
-.todo-input::placeholder {
-    color: #e2e2e2;
 }
 
 .todo-button {
@@ -79,57 +73,64 @@ h1 {
     padding: 16px 22px;
 }
 
-.todo-container {
+/* .todo-container {
     display: flex;
     flex-direction: row;
     position: relative;
-}
+} */
 
-.todo-row {
+.todo {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    height: 50px;
     margin: 4px auto;
     color: #fff;
     background: linear-gradient(90deg,
             rgb(217, 235, 24) 0%,
             rgb(250, 77, 9) 100%);
-
-    padding: 16px;
+    line-height: 50px;
     border-radius: 5px;
     width: 90%;
 }
 
-.todo-row:nth-child(4n + 1) {
+.todo:nth-child(4n + 1) {
     background: linear-gradient(90deg,
             rgb(85, 0, 254) 0%,
             rgb(194, 110, 246) 100%);
 }
 
-.todo-row:nth-child(4n + 2) {
+.todo:nth-child(4n + 2) {
     background: linear-gradient(90deg,
             rgb(251, 38, 240) 0%,
             rgb(211, 0, 113) 100%);
 }
 
-.todo-row:nth-child(4n + 3) {
+.todo:nth-child(4n + 3) {
     background: linear-gradient(90deg,
             rgb(20, 231, 255) 0%,
             rgb(0, 184, 220) 100%);
 }
 
-.icons {
+.todo_radio, .todo_radio_unchecked{
+    height: 24px;
+    width: 24px;
+    border-radius: 50px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    margin: 13px 1rem 0 1rem;
     display: flex;
     align-items: center;
-    font-size: 24px;
-    cursor: pointer;
+    justify-content: center;
+    color: white;
+    background-color: #161a2b;
+  }
+  .todo_radio_unchecked{
+    background-color: transparent;
+  }
+.todo-row{
+    width: 90%;
+    text-align: start;
+    
 }
-
-.delete-icon {
-    margin-right: 5px;
-    color: #fff;
-}
-
-.edit-icon {
-    color: #fff;
+.todo_delete{
+    margin: 3px 10px 0 0;
 }
