@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -22,15 +23,17 @@ body {
     margin: 128px auto;
     border-radius: 10px;
     padding-bottom: 32px;
+    font-size: 16px;
 }
 
 h1 {
     margin: 32px 0;
     color: #fff;
     font-size: 24px;
+    font-weight: 600;
 }
 
-.complete{
+.complete {
     text-decoration: line-through;
     opacity: 0.4;
 }
@@ -47,6 +50,16 @@ h1 {
     width: 320px;
     background: transparent;
     color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.todo-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.todo-input.edit {
+    border: 2px solid #149fff;
 }
 
 .todo-button {
@@ -55,62 +68,41 @@ h1 {
     border-radius: 0 4px 4px 0;
     cursor: pointer;
     outline: none;
-    background: linear-gradient(90deg,
-    #32dac5 0%,
-    rgb(255, 100, 216) 100%);
+    background: linear-gradient(90deg, #32dac5 0%, rgb(255, 100, 216) 100%);
     color: #fff;
     text-transform: capitalize;
 }
 
-.todo-input.edit {
-    border: 2px solid #149fff;
-}
-
 .todo-button.edit {
-    background: linear-gradient(90deg,
-    rgb(16, 255, 239) 0%,
-    rgb(255, 100, 216) 100%);
+    background: linear-gradient(90deg, rgb(16, 255, 239) 0%, rgb(255, 100, 216) 100%);
     padding: 16px 22px;
 }
-
-/* .todo-container {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-} */
 
 .todo {
     display: flex;
     height: 50px;
     margin: 4px auto;
     color: #fff;
-    background: linear-gradient(90deg,
-            rgb(217, 235, 24) 0%,
-            rgb(250, 77, 9) 100%);
+    background: linear-gradient(90deg, rgb(217, 235, 24) 0%, rgb(250, 77, 9) 100%);
     line-height: 50px;
     border-radius: 5px;
     width: 90%;
 }
 
 .todo:nth-child(4n + 1) {
-    background: linear-gradient(90deg,
-            rgb(85, 0, 254) 0%,
-            rgb(194, 110, 246) 100%);
+    background: linear-gradient(90deg, rgb(85, 0, 254) 0%, rgb(194, 110, 246) 100%);
 }
 
 .todo:nth-child(4n + 2) {
-    background: linear-gradient(90deg,
-            rgb(251, 38, 240) 0%,
-            rgb(211, 0, 113) 100%);
+    background: linear-gradient(90deg, rgb(251, 38, 240) 0%, rgb(211, 0, 113) 100%);
 }
 
 .todo:nth-child(4n + 3) {
-    background: linear-gradient(90deg,
-            rgb(20, 231, 255) 0%,
-            rgb(0, 184, 220) 100%);
+    background: linear-gradient(90deg, rgb(20, 231, 255) 0%, rgb(0, 184, 220) 100%);
 }
 
-.todo_radio, .todo_radio_unchecked{
+.todo_radio,
+.todo_radio_unchecked {
     height: 24px;
     width: 24px;
     border-radius: 50px;
@@ -122,15 +114,106 @@ h1 {
     justify-content: center;
     color: white;
     background-color: #161a2b;
-  }
-  .todo_radio_unchecked{
+}
+
+.todo_radio_unchecked {
     background-color: transparent;
-  }
-.todo-row{
+}
+
+.todo-row {
     width: 90%;
     text-align: start;
-    
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
-.todo_delete{
+
+.todo_delete {
     margin: 3px 10px 0 0;
+}
+
+/* Responsive - Tablet */
+@media screen and (max-width: 768px) {
+    .todo-app {
+        margin: 64px auto;
+        max-width: 95%;
+        min-height: auto;
+        padding-bottom: 24px;
+    }
+
+    h1 {
+        margin: 24px 0;
+        font-size: 22px;
+    }
+
+    .todo-form {
+        max-width: 100%;
+        padding: 0 12px;
+    }
+
+    .todo-input {
+        padding: 12px 24px 12px 12px;
+        width: calc(100% - 50px);
+    }
+
+    .todo-button {
+        padding: 14px;
+    }
+
+    .todo {
+        width: 95%;
+        min-height: 50px;
+        height: auto;
+        line-height: 1.4;
+        padding: 8px 0;
+        align-items: center;
+    }
+
+    .todo-row {
+        display: flex;
+        align-items: center;
+        word-break: break-word;
+    }
+
+    .todo_radio,
+    .todo_radio_unchecked {
+        margin: 0 12px;
+        flex-shrink: 0;
+    }
+
+    .todo_delete {
+        flex-shrink: 0;
+    }
+}
+
+/* Responsive - Mobile */
+@media screen and (max-width: 480px) {
+    .todo-app {
+        margin: 32px auto;
+        border-radius: 8px;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin: 20px 0;
+    }
+
+    .todo-input {
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+
+    .todo-button {
+        padding: 12px;
+    }
+
+    .todo_radio,
+    .todo_radio_unchecked {
+        height: 20px;
+        width: 20px;
+        margin: 0 8px;
+    }
+
+    .delete-icon {
+        font-size: 18px;
+    }
 }

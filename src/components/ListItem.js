@@ -1,4 +1,3 @@
-import React from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { AiOutlineCheck } from 'react-icons/ai';
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { BsChevronDoubleRight } from 'react-icons/bs';
 import ListItem from './ListItem';
 
