@@ -1,89 +1,69 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { BsChevronDoubleRight } from 'react-icons/bs';
 import ListItem from './ListItem';
 
 function TodoForm() {
-    // Gets todoItems from localstorage if there´s.
-    const [allTodos, setAllTodos] = useState(() => {
-        return JSON.parse(localStorage.getItem("Todos")) || []
-    })
-    const [todo, setTodo] = useState()
+    const [todos, setTodos] = useState(() => {
+        return JSON.parse(localStorage.getItem('Todos')) || [];
+    });
+    const [inputValue, setInputValue] = useState('');
 
-    // Add todos and prevent page to relode. 
+    useEffect(() => {
+        localStorage.setItem('Todos', JSON.stringify(todos));
+    }, [todos]);
+
     const addTodo = (e) => {
-        e.preventDefault()
-        const todoItem = {
-            id: new Date().getTime(),
-            text: todo,
+        e.preventDefault();
+        if (!inputValue.trim()) return;
+
+        const newTodo = {
+            id: Date.now(),
+            text: inputValue,
             isChecked: false
-        }
-        if (todo !== "") {
-            setAllTodos([...allTodos].concat(todoItem))
-            setTodo("")
-        }
-    }
-    // Gets all todos
-    const getAllTodos = () => {
-        let stored = JSON.parse(localStorage.getItem("Todos"))
-        if (stored) {
-            setAllTodos(stored)
-        }
-    }
-    // Updates if todo is done
+        };
+        setTodos([...todos, newTodo]);
+        setInputValue('');
+    };
+
     const toggleChecked = (id) => {
-        let updatedTodos = [...allTodos].map(todo => {
-            if (todo.id === id) {
-                todo.isChecked = !todo.isChecked
-            }
-            return todo
-        })
-        setAllTodos(updatedTodos)
-    }
-    // Deletes todo
+        setTodos(todos.map(todo =>
+            todo.id === id ? { ...todo, isChecked: !todo.isChecked } : todo
+        ));
+    };
+
     const deleteTodo = (id) => {
-        const filteredTodo = allTodos.filter(todo => todo.id !== id)
-        setAllTodos(filteredTodo)
-    }
-
-    useEffect(() => {
-        getAllTodos()
-    }, [])
-
-
-    useEffect(() => {
-        localStorage.setItem("Todos", JSON.stringify(allTodos))
-    }, [allTodos])
+        setTodos(todos.filter(todo => todo.id !== id));
+    };
 
     return (
         <>
-        {/* Form with input and a button */}
             <h1>TODO</h1>
-            <form className="todo-form" onSubmit={addTodo} >
-                <input type={"text"} className="todo-input" value={todo || ''} onChange={(e) => setTodo(e.target.value)} />
-                <button className="todo-button" onClick={addTodo} >
+            <form className="todo-form" onSubmit={addTodo}>
+                <input
+                    type="text"
+                    className="todo-input"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    placeholder="Add a task..."
+                />
+                <button type="submit" className="todo-button">
                     <BsChevronDoubleRight />
                 </button>
             </form>
 
+            {todos.map(todo => (
+                <ListItem
+                    key={todo.id}
+                    text={todo.text}
+                    isChecked={todo.isChecked}
+                    toggleChecked={() => toggleChecked(todo.id)}
+                    deleteTodo={() => deleteTodo(todo.id)}
+                />
+            ))}
 
-            { // Will be shown if there´s any todos in the list.
-                allTodos.map(todo => (
-                    <ListItem
-                        key={todo.id}
-                        deleteTodo={() => deleteTodo(todo.id)}
-                        text={todo.text}
-                        isChecked={todo.isChecked}
-                        toggleChecked={() => toggleChecked(todo.id)}
-                    />
-                ))
-            }
-            { // Else list will display this text.
-                allTodos.length === 0 && (
-                    <p>Done!</p>
-                )
-            }
+            {todos.length === 0 && <p>No tasks yet!</p>}
         </>
-    )
+    );
 }
 
-export default TodoForm
+export default TodoForm;
